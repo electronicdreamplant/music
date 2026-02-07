@@ -3,85 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ox1Digital Music</title>
-    <style>
-        :root { --accent: #00d1b2; --bg: #121212; --card: #1e1e1e; }
-        body { background: var(--bg); color: white; font-family: system-ui, sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; }
-        h1 { border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-bottom: 30px; }
-        .track-list { display: flex; flex-direction: column; gap: 20px; }
-        .track-card { background: var(--card); padding: 20px; border-radius: 12px; border: 1px solid #333; }
-        .waveform-box { width: 100%; height: 80px; margin: 15px 0; background: rgba(0,0,0,0.1); border-radius: 4px; }
-        .controls { display: flex; align-items: center; justify-content: space-between; }
-        .play-toggle { 
-            background: var(--accent); border: none; color: black; padding: 10px 25px; 
-            border-radius: 50px; font-weight: bold; cursor: pointer; min-width: 100px;
-        }
-        .play-toggle:disabled { background: #444; cursor: not-allowed; }
-    </style>
+    <title>Electronic Dream Plant | Music</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Music POC: Clean Paths</h1>
+    <section class="profile-header">
+        <div class="header-content">
+            <div class="profile-pic"></div>
+            <div>
+                <h1 style="margin:0; font-size: 2.8rem;">Electronic Dream Plant</h1>
+                <p style="color: var(--text-gray); font-size: 1.1rem;">Oxford, UK</p>
+            </div>
+        </div>
+    </section>
 
-    <div class="track-list">
-        <div id="tracks-container"></div>
-    </div>
+    <div class="container" id="tracks-container">
+        </div>
 
-    <script type="module">
-        import WaveSurfer from 'https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.esm.js'
-
-        // Match these exactly to your new filenames in the /audio folder
-        const myTracks = [
-            { id: 1, title: "Solid State", file: "solid-state.mp3" },
-            { id: 2, title: "Ethereal", file: "ethereal.mp3" },
-            { id: 3, title: "The Nature of Miracles", file: "nature-of-miracles.mp3" },
-            { id: 4, title: "A Stitch in Time", file: "stitch-in-time.mp3" },
-        ];
-
-        let activeWavesurfer = null;
-        const container = document.getElementById('tracks-container');
-
-        myTracks.forEach(track => {
-            const card = document.createElement('div');
-            card.className = 'track-card';
-            card.innerHTML = `
-                <div class="controls">
-                    <h3 style="margin:0">${track.title}</h3>
-                </div>
-                <div id="wave-${track.id}" class="waveform-box"></div>
-                <button class="play-toggle" id="btn-${track.id}">Loading...</button>
-            `;
-            container.appendChild(card);
-
-            const ws = WaveSurfer.create({
-                container: `#wave-${track.id}`,
-                waveColor: '#4f4f4f',
-                progressColor: '#00d1b2',
-                url: `./audio/${track.file}`,
-                barWidth: 3,
-                barGap: 3,
-                height: 80,
-            });
-
-            const btn = document.getElementById(`btn-${track.id}`);
-
-            ws.on('ready', () => btn.textContent = 'Play');
-            
-            ws.on('play', () => {
-                if (activeWavesurfer && activeWavesurfer !== ws) activeWavesurfer.pause();
-                activeWavesurfer = ws;
-                btn.textContent = 'Pause';
-            });
-
-            ws.on('pause', () => btn.textContent = 'Play');
-            
-            ws.on('error', () => {
-                btn.textContent = 'Error';
-                console.error("Could not load: " + track.file);
-            });
-
-            btn.onclick = () => ws.playPause();
-        });
-    </script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>
