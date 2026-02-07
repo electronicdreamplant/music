@@ -139,3 +139,11 @@ body {
     align-self: flex-start;
     margin-top: 10px;
 }
+/* --- Waveform styling --- */
+.waveform-container {
+    width: 100%;
+    min-width: 300px; /* Ensures it has space to draw */
+    height: 60px;
+    margin-top: 10px;
+    cursor: pointer;
+}
