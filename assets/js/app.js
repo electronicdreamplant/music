@@ -12,10 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const ws = WaveSurfer.create({
             container: `#wave-${id}`,
             waveColor: '#555',
-            progressColor: '#f50',
+            progressColor: '#800080',
             url: audioUrl,
-            barWidth: 2,
-            height: 60,
+            barWidth: 3,
+            height: 80,
             responsive: true
         });
 
