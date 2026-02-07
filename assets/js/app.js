@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const ws = WaveSurfer.create({
             container: `#wave-${id}`,
             waveColor: '#555',
-            progressColor: '#800080',
-            cursorColor: '#800080',
+            progressColor: '#b366ff',
+            cursorColor: '#b366ff',
             cursorWidth: 3,
             url: audioUrl,
             barWidth: 2,
