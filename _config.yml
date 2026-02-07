@@ -1,6 +1,6 @@
 title: Electronic Dream Plant
 url: "https://www.ox1digital.co.uk"
-baseurl: "" # Change this to empty
+baseurl: "/music" # Keep this so Jekyll knows the folder exists
 
 collections:
   tracks:
