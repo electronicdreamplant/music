@@ -7,7 +7,7 @@ layout: null
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ site.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
 </head>
 <body>
 
@@ -22,12 +22,12 @@ layout: null
         {% assign sorted_tracks = site.tracks | sort: 'date' | reverse %}
         {% for track in sorted_tracks %}
         <div class="track-card">
-            <img src="{{ '/assets/images/' | append: track.cover_art | relative_url }}" class="cover-art">
+            <img src="{{ site.baseurl }}/assets/images/{{ track.cover_art }}" class="cover-art">
             
             <div class="track-content">
                 <div class="play-row">
                     <button class="play-btn" 
-                            data-url="{{ '/assets/audio/' | append: track.audio_file | relative_url }}" 
+                            data-url="{{ site.baseurl }}/assets/audio/{{ track.audio_file }}" 
                             id="btn-{{ forloop.index }}">
                         <svg viewBox="0 0 24 24" width="24"><path d="M8 5v14l11-7z" fill="white"/></svg>
                     </button>
@@ -45,6 +45,6 @@ layout: null
         {% endfor %}
     </div>
 
-    <script type="module" src="{{ '/assets/js/app.js' | relative_url }}"></script>
+    <script type="module" src="{{ site.baseurl }}/assets/js/app.js"></script>
 </body>
 </html>
