@@ -6,32 +6,28 @@ layout: null
 <head>
     <meta charset="UTF-8">
     <title>Electronic Dream Plant</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/music/assets/css/style.css">
 </head>
 <body>
-    <section class="profile-header">
-        <h1>Electronic Dream Plant</h1>
-    </section>
-
     <div class="container">
         {% assign sorted_tracks = site.tracks | sort: 'date' | reverse %}
         {% for track in sorted_tracks %}
         <div class="track-card">
-            <img src="assets/images/{{ track.cover_art }}" class="cover-art">
+            <img src="/music/assets/images/{{ track.cover_art }}" class="cover-art">
             <div class="track-content">
                 <div class="play-row">
                     <button class="play-btn" 
-                            data-url="assets/audio/{{ track.audio_file }}" 
+                            data-url="/music/assets/audio/{{ track.audio_file }}" 
                             id="btn-{{ forloop.index }}">
                         <svg viewBox="0 0 24 24" width="24"><path d="M8 5v14l11-7z" fill="white"/></svg>
                     </button>
-                    <h2>{{ track.title }}</h2>
+                    <h2 class="track-title">{{ track.title }}</h2>
                 </div>
                 <div id="wave-{{ forloop.index }}" class="waveform-container"></div>
             </div>
         </div>
         {% endfor %}
     </div>
-    <script type="module" src="assets/js/app.js"></script>
+    <script type="module" src="/music/assets/js/app.js"></script>
 </body>
 </html>
