@@ -118,3 +118,24 @@ body {
     height: 70px; 
     cursor: pointer; 
 }
+
+.play-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.title-area {
+    flex-grow: 1;
+    margin-left: 15px;
+}
+
+.genre-tag {
+    background: #333;
+    color: #ccc;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    align-self: flex-start;
+    margin-top: 10px;
+}
