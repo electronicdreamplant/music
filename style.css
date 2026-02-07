@@ -1,0 +1,120 @@
+:root { 
+    --sc-orange: #f50; 
+    --bg-black: #111; 
+    --card-bg: #181818;
+    --text-gray: #999;
+}
+
+body { 
+    background: var(--bg-black); 
+    color: white; 
+    font-family: "Inter", "Lucida Grande", sans-serif; 
+    margin: 0; 
+    padding-bottom: 50px;
+}
+
+/* --- THE HEADER --- */
+.profile-header {
+    background: linear-gradient(135.2deg, #333 0.8%, #111 98.2%);
+    padding: 60px 20px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 30px;
+}
+
+.header-content { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    display: flex; 
+    align-items: center; 
+    gap: 25px; 
+}
+
+.profile-pic { 
+    width: 150px; 
+    height: 150px; 
+    border-radius: 50%; 
+    background: #444; 
+    border: 1px solid #555;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+/* --- THE TRACK LIST --- */
+.container { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+}
+
+.track-card {
+    display: flex;
+    background: var(--card-bg);
+    margin-bottom: 25px;
+    padding: 15px;
+    gap: 20px;
+    border: 1px solid #222;
+    transition: background 0.2s;
+}
+
+.track-card:hover {
+    background: #222;
+}
+
+.cover-art { 
+    width: 160px; 
+    height: 160px; 
+    object-fit: cover; 
+    flex-shrink: 0; 
+    background: #222; 
+}
+
+.track-info { 
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+}
+
+.play-row { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+}
+
+.artist-name { 
+    color: var(--text-gray); 
+    font-size: 0.9rem; 
+    margin: 0; 
+}
+
+.track-title { 
+    font-size: 1.4rem; 
+    margin: 5px 0; 
+    font-weight: 300; 
+}
+
+/* --- ICON BUTTONS --- */
+.play-btn {
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%;
+    background: var(--sc-orange); 
+    border: none;
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    transition: transform 0.1s;
+}
+
+.play-btn:active { transform: scale(0.95); }
+
+.play-btn svg { 
+    width: 22px; 
+    fill: white; 
+}
+
+.waveform-container { 
+    width: 100%; 
+    height: 70px; 
+    cursor: pointer; 
+}
