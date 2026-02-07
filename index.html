@@ -6,14 +6,14 @@ layout: null
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ site.title }}</title>
-    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
+    <title>Electronic Dream Plant</title>
+    <link rel="stylesheet" href="/music/assets/css/style.css">
 </head>
 <body>
 
     <section class="profile-header">
         <div class="header-content">
-            <h1>{{ site.title }}</h1>
+            <h1>Electronic Dream Plant</h1>
             <p>Oxford, UK</p>
         </div>
     </section>
@@ -22,12 +22,11 @@ layout: null
         {% assign sorted_tracks = site.tracks | sort: 'date' | reverse %}
         {% for track in sorted_tracks %}
         <div class="track-card">
-            <img src="{{ site.baseurl }}/assets/images/{{ track.cover_art }}" class="cover-art">
-            
+            <img src="/music/assets/images/{{ track.cover_art }}" class="cover-art">
             <div class="track-content">
                 <div class="play-row">
                     <button class="play-btn" 
-                            data-url="{{ site.baseurl }}/assets/audio/{{ track.audio_file }}" 
+                            data-url="/music/assets/audio/{{ track.audio_file }}" 
                             id="btn-{{ forloop.index }}">
                         <svg viewBox="0 0 24 24" width="24"><path d="M8 5v14l11-7z" fill="white"/></svg>
                     </button>
@@ -35,9 +34,7 @@ layout: null
                         <p class="artist-name">Electronic Dream Plant</p>
                         <h2 class="track-title">{{ track.title }}</h2>
                     </div>
-                    {% if track.genre %}
-                    <span class="genre-tag">{{ track.genre }}</span>
-                    {% endif %}
+                    {% if track.genre %}<span class="genre-tag">{{ track.genre }}</span>{% endif %}
                 </div>
                 <div id="wave-{{ forloop.index }}" class="waveform-container"></div>
             </div>
@@ -45,6 +42,6 @@ layout: null
         {% endfor %}
     </div>
 
-    <script type="module" src="{{ site.baseurl }}/assets/js/app.js"></script>
+    <script type="module" src="/music/assets/js/app.js"></script>
 </body>
 </html>
