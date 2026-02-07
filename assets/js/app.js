@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             barWidth: 3,             
             barGap: 3,
             barRadius: 4,
-            height: 100,
+            height: 80,
             responsive: true,
             normalize: true
         });
