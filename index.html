@@ -11,37 +11,38 @@ layout: null
 </head>
 <body>
 
-    <section class="profile-header">
-        <div class="header-content" style="padding: 40px 20px; background: #111; border-bottom: 1px solid #333;">
-            <h1 style="margin:0; font-size: 2.5rem; color: white;">Electronic Dream Plant</h1>
-            <p style="color: #999;">Oxford, UK</p>
+    <header class="site-header">
+        <div class="wrapper">
+            <h1>Electronic Dream Plant</h1>
+            <p class="location">Oxford, UK</p>
         </div>
-    </section>
+    </header>
 
-    <div class="container" style="max-width: 900px; margin: 0 auto; padding: 20px;">
+    <main class="container">
         {% assign sorted_tracks = site.tracks | sort: 'date' | reverse %}
         {% for track in sorted_tracks %}
-        <div class="track-card" style="display: flex; background: #181818; margin-bottom: 20px; padding: 15px; gap: 20px; border: 1px solid #222;">
-            <img src="assets/images/{{ track.cover_art }}" class="cover-art" style="width: 160px; height: 160px; object-fit: cover; background: #222;">
+        <article class="track-card">
+            <div class="artwork-container">
+                <img src="assets/images/{{ track.cover_art }}" alt="{{ track.title }}" class="cover-art">
+            </div>
             
-            <div class="track-info" style="flex-grow: 1;">
-                <div class="play-row" style="display: flex; align-items: center; gap: 15px;">
+            <div class="track-content">
+                <div class="play-row">
                     <button class="play-btn" 
                             data-url="assets/audio/{{ track.audio_file }}" 
-                            id="btn-{{ forloop.index }}"
-                            style="width: 50px; height: 50px; border-radius: 50%; background: #f50; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-                        <svg viewBox="0 0 24 24" width="24"><path d="M8 5v14l11-7z" fill="white"/></svg>
+                            id="btn-{{ forloop.index }}">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="white"/></svg>
                     </button>
-                    <div>
-                        <h2 style="margin:0; font-weight: 300; color: white;">{{ track.title }}</h2>
-                        <span style="color: #999; font-size: 0.8rem;">{{ track.genre }}</span>
+                    <div class="title-group">
+                        <h2 class="track-title">{{ track.title }}</h2>
+                        <span class="genre-tag">{{ track.genre }}</span>
                     </div>
                 </div>
-                <div id="wave-{{ forloop.index }}" style="width: 100%; height: 60px; margin-top: 15px;"></div>
+                <div id="wave-{{ forloop.index }}" class="waveform-box"></div>
             </div>
-        </div>
+        </article>
         {% endfor %}
-    </div>
+    </main>
 
     <script type="module" src="assets/js/app.js"></script>
 </body>
