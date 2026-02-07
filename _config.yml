@@ -1,6 +1,6 @@
 title: Electronic Dream Plant
 url: "https://www.ox1digital.co.uk"
-baseurl: "/music"
+baseurl: "" # Change this to empty
 
 collections:
   tracks:
