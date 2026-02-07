@@ -7,26 +7,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const ws = WaveSurfer.create({
             container: `#wave-${id}`,
-            waveColor: '#444',       // Darker gray for the unplayed part
-            progressColor: '#800080', // Your Purple for the played part
+            waveColor: '#555',       // The "unplayed" gray bars
+            progressColor: '#800080', // YOUR PURPLE: The "played" bars
+            cursorColor: '#800080',   // The vertical playhead line
             url: audioUrl,
-            barWidth: 3,             // Slightly thicker bars look better with purple
+            barWidth: 3,             
             barGap: 3,
             barRadius: 4,
-            height: 80,
+            height: 100,
             responsive: true,
             normalize: true
         });
 
-        // Toggle Play/Pause logic
-        btn.onclick = () => ws.playPause();
+        // Icon management
+        const playIcon = '<svg viewBox="0 0 24 24" width="28"><path d="M8 5v14l11-7z" fill="white"/></svg>';
+        const pauseIcon = '<svg viewBox="0 0 24 24" width="28"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="white"/></svg>';
 
-        // Optional: Change button icon based on state
-        ws.on('play', () => {
-            btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="white"/></svg>';
-        });
-        ws.on('pause', () => {
-            btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="white"/></svg>';
-        });
+        ws.on('play', () => btn.innerHTML = pauseIcon);
+        ws.on('pause', () => btn.innerHTML = playIcon);
+        
+        btn.onclick = () => ws.playPause();
     });
 });
