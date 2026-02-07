@@ -100,6 +100,10 @@ body {
     height: 80px;
 }
 
-:host .cursor {
-    background-color: #800080;
+.time-display {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #999;
+    font-family: monospace; /* Monospace keeps numbers from "jumping" as they change */
+    text-align: right;
 }
