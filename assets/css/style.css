@@ -64,7 +64,7 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: #800080; 
+    background: #800080; /* Your signature Purple */
     border: none;
     cursor: pointer;
     display: flex;
@@ -89,9 +89,10 @@ body {
 }
 
 .genre-tag {
-    color: #800080;
+    color: #b366ff; /* A lighter purple so it pops against the dark background */
     font-size: 0.85rem;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .waveform-box {
