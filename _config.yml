@@ -1,10 +1,7 @@
 title: Electronic Dream Plant
 url: "https://www.ox1digital.co.uk"
-baseurl: "/music" # Keep this so Jekyll knows the folder exists
+baseurl: "/music"
 
 collections:
   tracks:
     output: true
-
-# Add this to ensure these folders are copied to the final site
-include: [assets]
