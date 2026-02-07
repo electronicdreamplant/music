@@ -37,8 +37,12 @@ layout: null
                         <span class="genre-tag">{{ track.genre }}</span>
                     </div>
                 </div>
-                <div id="wave-{{ forloop.index }}" class="waveform-box"></div>
-            </div>
+                    <div id="wave-{{ forloop.index }}" class="waveform-box"> 
+                </div>
+                    <div class="time-display">
+                        <span id="current-{{ forloop.index }}">0:00</span> / <span id="duration-{{ forloop.index }}">0:00</span>
+                    </div>
+                </div>
         </article>
         {% endfor %}
     </main>
