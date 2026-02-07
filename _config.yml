@@ -1,7 +1,9 @@
 title: Electronic Dream Plant
 url: "https://www.ox1digital.co.uk"
-baseurl: ""
+baseurl: "/music"
 
 collections:
   tracks:
     output: true
+
+include: [assets]
