@@ -10,11 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
             waveColor: '#555',       // The "unplayed" gray bars
             progressColor: '#800080', // YOUR PURPLE: The "played" bars
             cursorColor: '#800080',   // The vertical playhead line
+            cursorWidth: 3,
             url: audioUrl,
-            barWidth: 3,             
-            barGap: 3,
+            barWidth: 2,             
+            barGap: 2,
             barRadius: 4,
-            height: 80,
+            height: 75,
             responsive: true,
             normalize: true
         });
