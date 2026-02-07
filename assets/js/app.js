@@ -7,6 +7,8 @@ const pauseIcon = '<svg viewBox="0 0 24 24" width="24"><path d="M6 19h4V5H6v14zm
 // This looks for all play buttons Jekyll just rendered
 document.querySelectorAll('.play-btn').forEach((btn) => {
     const audioUrl = btn.getAttribute('data-url');
+    console.log("Attempting to load audio from:", audioUrl); // This will tell us the truth in the console
+    
     // We get the unique ID (1, 2, 3...) from the button's ID
     const id = btn.id.split('-')[1];
     const containerId = `#wave-${id}`;
