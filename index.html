@@ -2,28 +2,42 @@
 layout: null
 ---
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
-    <header class="profile-header">
-        <h1>Electronic Dream Plant</h1>
-    </header>
+
+    <section class="profile-header">
+        <div class="header-content">
+            <h1>{{ site.title }}</h1>
+            <p>Oxford, UK</p>
+        </div>
+    </section>
 
     <div class="container">
         {% assign sorted_tracks = site.tracks | sort: 'date' | reverse %}
         {% for track in sorted_tracks %}
         <div class="track-card">
-            <img src="/assets/images/{{ track.cover_art }}" class="cover-art">
-            <div class="track-info">
+            <img src="{{ '/assets/images/' | append: track.cover_art | relative_url }}" class="cover-art">
+            
+            <div class="track-content">
                 <div class="play-row">
                     <button class="play-btn" 
-                            data-url="/assets/audio/{{ track.audio_file }}" 
+                            data-url="{{ '/assets/audio/' | append: track.audio_file | relative_url }}" 
                             id="btn-{{ forloop.index }}">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <svg viewBox="0 0 24 24" width="24"><path d="M8 5v14l11-7z" fill="white"/></svg>
                     </button>
-                    <h2>{{ track.title }}</h2>
+                    <div class="title-area">
+                        <p class="artist-name">Electronic Dream Plant</p>
+                        <h2 class="track-title">{{ track.title }}</h2>
+                    </div>
+                    {% if track.genre %}
+                    <span class="genre-tag">{{ track.genre }}</span>
+                    {% endif %}
                 </div>
                 <div id="wave-{{ forloop.index }}" class="waveform-container"></div>
             </div>
@@ -31,6 +45,6 @@ layout: null
         {% endfor %}
     </div>
 
-    <script type="module" src="/assets/js/app.js"></script>
+    <script type="module" src="{{ '/assets/js/app.js' | relative_url }}"></script>
 </body>
 </html>
