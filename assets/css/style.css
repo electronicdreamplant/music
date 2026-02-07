@@ -9,6 +9,9 @@ body {
     background: #800080;
     border-bottom: 1px solid #333;
 }
+h1 {
+    font-weight: 100;
+}
 
 .wrapper, .container {
     max-width: 900px;
