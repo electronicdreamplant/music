@@ -28,29 +28,29 @@ layout: null
         {% assign sorted_tracks = site.tracks | sort: 'date' | reverse %}
         {% for track in sorted_tracks %}
         <article class="track-card">
-            <div class="artwork-container">
-                <img src="assets/images/{{ track.cover_art }}" alt="{{ track.title }}" class="cover-art">
-            </div>
+          <div class="card-top-row">
+              <div class="artwork-container">
+                  <img src="assets/images/{{ track.cover_art }}" alt="{{ track.title }}" class="cover-art">
+              </div>
 
-            <div class="track-content">
-                <div class="play-row">
-                    <button class="play-btn"
-                            data-url="assets/audio/{{ track.audio_file }}"
-                            id="btn-{{ forloop.index }}">
-                        </button>
-                    <div class="title-group">
-                        <h2 class="track-title">{{ track.title }}</h2>
-                        <span class="genre-tag">{{ track.genre }}</span>
-                    </div>
-                </div>
-            </div>
+              <div class="track-info">
+                  <button class="play-btn" data-url="assets/audio/{{ track.audio_file }}" id="btn-{{ forloop.index }}">
+                      </button>
+                  <div class="title-group">
+                      <h2 class="track-title">{{ track.title }}</h2>
+                      <span class="genre-tag">{{ track.genre }}</span>
+                  </div>
+              </div>
+          </div>
 
-            <div id="wave-{{ forloop.index }}" class="waveform-box"></div>
-            <div class="time-display">
-                <span id="current-{{ forloop.index }}">0:00</span> /
-                <span id="duration-{{ forloop.index }}">0:00</span>
-            </div>
-        </article>
+          <div class="card-bottom-row">
+              <div id="wave-{{ forloop.index }}" class="waveform-box"></div>
+              <div class="time-display">
+                  <span id="current-{{ forloop.index }}">0:00</span> /
+                  <span id="duration-{{ forloop.index }}">0:00</span>
+              </div>
+          </div>
+      </article>
         {% endfor %}
     </main>
 
