@@ -51,28 +51,25 @@ function initWaveSurfer(btn) {
     const pauseIcon = '<svg viewBox="0 0 24 24" width="28"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="white"/></svg>';
 
     ws.on('play', () => {
+        // 1. If another track is playing, stop it and snap back to 0:00
         if (activeWS && activeWS !== ws) {
-            // 1. Get the button for the track we are STOPPING
+            activeWS.stop(); // This resets the playhead
+
+            // 2. Explicitly find the OLD button and reset its icon
             const oldId = activeWS.container.id.split('-')[1];
             const oldBtn = document.getElementById(`btn-${oldId}`);
             const oldCurrentEl = document.getElementById(`current-${oldId}`);
 
-            activeWS.stop(); // Snap back to start
-
-            // 2. Explicitly flip the OLD button back to Play icon
-            if (oldBtn) oldBtn.innerHTML = playIcon;
-            if (oldCurrentEl) oldCurrentEl.textContent = "0:00";
+            if (oldBtn) oldBtn.innerHTML = playIcon; // Changes icon back to Triangle
+            if (oldCurrentEl) oldCurrentEl.textContent = "0:00"; // Resets timer text
         }
 
+        // 3. Set this track as the Active track and change its button to Pause
         activeWS = ws;
-
-        // 3. Explicitly set THIS button to Pause icon
         btn.innerHTML = pauseIcon;
 
-        // Glow Logic
-        document.querySelectorAll('.track-card').forEach(card => {
-            card.classList.remove('is-playing');
-        });
+        // 4. Glow Logic: Toggle the CSS class
+        document.querySelectorAll('.track-card').forEach(card => card.classList.remove('is-playing'));
         btn.closest('.track-card').classList.add('is-playing');
     });
 

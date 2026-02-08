@@ -11,11 +11,18 @@ layout: null
 </head>
 <body>
 
-    <header class="site-header">
-        <div class="wrapper">
-            <h1>Electronic Dream Plant</h1>
-        </div>
-    </header>
+  <header class="site-header">
+      <div class="header-left">
+          <h1>Electronic Dream Plant</h1>
+      </div>
+
+      <div class="header-right">
+          <div class="volume-container">
+              <span style="color: white; font-size: 0.9rem;">VOL</span>
+              <input type="range" id="master-vol" min="0" max="1" step="0.05" value="0.7">
+          </div>
+      </div>
+  </header>
 
     <main class="container">
         {% assign sorted_tracks = site.tracks | sort: 'date' | reverse %}
@@ -24,11 +31,11 @@ layout: null
             <div class="artwork-container">
                 <img src="assets/images/{{ track.cover_art }}" alt="{{ track.title }}" class="cover-art">
             </div>
-            
+
             <div class="track-content">
                 <div class="play-row">
-                    <button class="play-btn" 
-                            data-url="assets/audio/{{ track.audio_file }}" 
+                    <button class="play-btn"
+                            data-url="assets/audio/{{ track.audio_file }}"
                             id="btn-{{ forloop.index }}">
                         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="white"/></svg>
                     </button>
@@ -37,10 +44,10 @@ layout: null
                         <span class="genre-tag">{{ track.genre }}</span>
                     </div>
                 </div>
-                    <div id="wave-{{ forloop.index }}" class="waveform-box"> 
+                    <div id="wave-{{ forloop.index }}" class="waveform-box">
                 </div>
                     <div class="time-display">
-                        <span id="current-{{ forloop.index }}">0:00</span> / 
+                        <span id="current-{{ forloop.index }}">0:00</span> /
                         <span id="duration-{{ forloop.index }}">0:00</span>
                     </div>
                 </div>

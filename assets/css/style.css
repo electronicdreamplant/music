@@ -5,10 +5,17 @@ body {
 }
 
 .site-header {
-    padding: 40px;
-    background: #800080;
-    border-bottom: 1px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 15px 30px; /* Slimmer profile */
+    background: #800080; /* Your purple */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
+
 h1 {
     font-weight: 100;
 }
@@ -131,4 +138,20 @@ h1 {
     color: #999;
     font-family: monospace; /* Monospace keeps numbers from "jumping" as they change */
     text-align: right;
+}
+
+/* Master Volume Styles */
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+#master-vol {
+    accent-color: #b366ff; /* Your light purple */
+    width: 100px;
+    cursor: pointer;
 }
