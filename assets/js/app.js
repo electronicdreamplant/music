@@ -1,6 +1,7 @@
 import WaveSurfer from './wavesurfer.esm.js'
 
 let activeWS = null;
+let currentVolume = 0.7; // Global volume state
 
 const formatTime = (seconds) => {
     if (isNaN(seconds)) return "0:00";
@@ -10,13 +11,24 @@ const formatTime = (seconds) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. MASTER VOLUME CONTROL
+    const masterVol = document.getElementById('master-vol');
+    if (masterVol) {
+        masterVol.addEventListener('input', (e) => {
+            currentVolume = e.target.value;
+            if (activeWS) {
+                activeWS.setVolume(currentVolume);
+            }
+        });
+    }
+
     // Setting up the observer for Lazy Loading
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const btn = entry.target.querySelector('.play-btn');
                 initWaveSurfer(btn);
-                observer.unobserve(entry.target); // Only load it once
+                observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1 });
@@ -43,7 +55,7 @@ function initWaveSurfer(btn) {
         height: 75,
         responsive: true,
         normalize: true,
-        // Only fetch what's needed for the duration initially
+        volume: currentVolume, // Start every track at the master volume level
         fetchParams: { cache: 'default' }
     });
 
@@ -51,24 +63,27 @@ function initWaveSurfer(btn) {
     const pauseIcon = '<svg viewBox="0 0 24 24" width="28"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="white"/></svg>';
 
     ws.on('play', () => {
-        // 1. If another track is playing, stop it and snap back to 0:00
+        // KILL ALL OTHER AUDIO: Stop any track that isn't this one
         if (activeWS && activeWS !== ws) {
-            activeWS.stop(); // This resets the playhead
-
-            // 2. Explicitly find the OLD button and reset its icon
-            const oldId = activeWS.container.id.split('-')[1];
-            const oldBtn = document.getElementById(`btn-${oldId}`);
-            const oldCurrentEl = document.getElementById(`current-${oldId}`);
-
-            if (oldBtn) oldBtn.innerHTML = playIcon; // Changes icon back to Triangle
-            if (oldCurrentEl) oldCurrentEl.textContent = "0:00"; // Resets timer text
+            activeWS.stop(); // Snap back to start
         }
 
-        // 3. Set this track as the Active track and change its button to Pause
+        // RESET ALL UI: Force every button on the page back to "Play" icon
+        document.querySelectorAll('.play-btn').forEach(btnEl => {
+            btnEl.innerHTML = playIcon;
+        });
+
+        // RESET ALL CLOCKS: Force every timer back to 0:00 except this one
+        document.querySelectorAll('.current-time').forEach(timeEl => {
+            timeEl.textContent = "0:00";
+        });
+
+        // SET ACTIVE: Set this track as the one and only active track
         activeWS = ws;
+        activeWS.setVolume(currentVolume); // Ensure correct volume on start
         btn.innerHTML = pauseIcon;
 
-        // 4. Glow Logic: Toggle the CSS class
+        // UPDATE GLOW:
         document.querySelectorAll('.track-card').forEach(card => card.classList.remove('is-playing'));
         btn.closest('.track-card').classList.add('is-playing');
     });
