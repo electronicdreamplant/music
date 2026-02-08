@@ -37,20 +37,19 @@ layout: null
                     <button class="play-btn"
                             data-url="assets/audio/{{ track.audio_file }}"
                             id="btn-{{ forloop.index }}">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="white"/></svg>
-                    </button>
+                        </button>
                     <div class="title-group">
                         <h2 class="track-title">{{ track.title }}</h2>
                         <span class="genre-tag">{{ track.genre }}</span>
                     </div>
                 </div>
-                    <div id="wave-{{ forloop.index }}" class="waveform-box">
-                </div>
-                    <div class="time-display">
-                        <span id="current-{{ forloop.index }}">0:00</span> /
-                        <span id="duration-{{ forloop.index }}">0:00</span>
-                    </div>
-                </div>
+            </div>
+
+            <div id="wave-{{ forloop.index }}" class="waveform-box"></div>
+            <div class="time-display">
+                <span id="current-{{ forloop.index }}">0:00</span> /
+                <span id="duration-{{ forloop.index }}">0:00</span>
+            </div>
         </article>
         {% endfor %}
     </main>
