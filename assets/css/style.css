@@ -170,57 +170,90 @@ h1 {
     .site-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
-        padding: 10px 20px;
+        gap: 12px;
+        padding: 15px 20px;
     }
 
     h1 {
-        font-size: 1.4rem; /* Reduced h1 size */
+        font-size: 1.3rem; /* Reduced h1 size */
         margin: 0;
+        line-height: 1.2;
     }
 
     .volume-container {
         width: 100%;
-        justify-content: space-between;
+        max-width: 250px;
+        padding: 6px 12px;
     }
 
-    /* 2. Track Card Stacked Layout */
+    /* 2. Track Card: Allow horizontal info + vertical wave */
     .track-card {
-        flex-direction: column; /* Moves wave under the info */
-        gap: 15px;
-        padding: 15px;
+        flex-direction: row;
+        flex-wrap: wrap; /* Allows wave to drop down */
+        gap: 10px;
+        padding: 12px;
     }
 
-    /* 3. Artwork & Play Row Styling */
+    /* 3. Artwork: Scale down to match text */
     .artwork-container {
-        width: 80px; /* Shrunk to match text height */
-        height: 80px;
+        width: 65px;
+        height: 65px;
+        flex-shrink: 0;
+    }
+
+    /* 4. Track Content: Force horizontal layout for info */
+    .track-content {
+        display: flex;
+        flex-direction: row; /* Keep art, btn, and title side-by-side */
+        flex-wrap: wrap;
+        width: calc(100% - 75px); /* Take up remaining space next to art */
+        align-items: center;
+        gap: 10px;
     }
 
     .play-row {
-        gap: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
         margin-bottom: 0;
+        width: 100%; /* Ensures this top group stays together */
     }
 
-    /* 4. Text Scaling */
+    /* 5. Scaled Text & Buttons */
     .track-title {
-        font-size: 1.2rem;
+        font-size: 1.05rem; /* Shrunk title */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .genre-tag {
-        font-size: 0.75rem;
+        font-size: 0.7rem; /* Shrunk category */
+        display: block;
     }
 
-    /* 5. Circular Play Button (Prevent Warp) */
     .play-btn {
-        width: 50px;
-        height: 50px;
-        flex-shrink: 0; /* Prevents squishing into an oval */
+        width: 44px; /* Shrunk button */
+        height: 44px;
+        flex-shrink: 0; /* No warping */
     }
 
-    /* 6. Waveform Position */
+    .play-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* 6. Waveform: Push to its own full-width line */
     .waveform-box {
-        width: 100%; /* Ensures it doesn't extend beyond screen */
+        width: 100%;
+        order: 10; /* Forces it to the bottom */
+        margin-top: 10px;
+    }
+
+    .time-display {
+        width: 100%;
+        order: 11;
         margin-top: 5px;
+        font-size: 0.75rem;
     }
 }
