@@ -132,7 +132,7 @@ h1 {
     position: relative;
     width: 100%;
     height: 75px;
-    /* The Shimmer is now part of the background so the canvas can cover it */
+    /* Shimmering background for the loading state */
     background: #222 linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
     background-size: 200% 100%;
     animation: shimmer 2s infinite linear;
@@ -149,7 +149,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 2px;
-    background: rgba(179, 102, 255, 0.3); /* Muted purple line */
+    background: rgba(179, 102, 255, 0.3);
     z-index: 1;
 }
 
@@ -158,12 +158,15 @@ h1 {
     100% { background-position: -200% 0; }
 }
 
-/* The Real Wave (Canvas) */
-.waveform-box canvas {
+/* THE FIX: The Real Wave (Canvas) */
+/* We target the specific container WaveSurfer creates to hide the shimmer */
+.waveform-box shadow-root,
+.waveform-box canvas,
+.waveform-box div {
     position: relative;
-    z-index: 3;
-    /* This solid background hides the shimmer and dummy line once loaded */
-    background: #181818;
+    z-index: 5;
+    /* This solid color acts as the 'curtain' to hide the shimmer once loaded */
+    background: #181818 !important;
 }
 
 .time-display {
