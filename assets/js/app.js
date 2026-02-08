@@ -58,7 +58,7 @@ function initWaveSurfer(btn) {
         barWidth: 2,
         barGap: 2,
         barRadius: 4,
-        height: 40, // Matches your updated CSS height
+        height: 'auto',
         barHeight: 0.8, // This ensures the bars fit within the 40px //
         responsive: true,
         normalize: true,

@@ -126,13 +126,12 @@ body {
     text-transform: uppercase;
 }
 
-/* 6. WAVEFORM SECTION */
+/* 6. DESKTOP WAVEFORM HEIGHT (Default) */
 .waveform-box {
     width: 100%;
-    height: 60px;
+    height: 75px; /* Restored for desktop */
     background: #222;
     border-radius: 4px;
-    overflow: hidden;
 }
 
 .waveform-box canvas {
@@ -147,49 +146,70 @@ body {
     font-family: monospace;
 }
 
-/* 7. MOBILE RESPONSIVE */
+/* 7. MOBILE RESPONSIVE TWEAKS */
 @media (max-width: 600px) {
-    /* New Header Logic: Stacks Title over Volume */
+    /* Header: Remove volume overlap by hiding volume and centering title */
     .site-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+        justify-content: center;
         padding: 15px 20px;
+        min-height: 60px;
     }
 
     .site-header h1 {
-        font-size: 1.4rem; /* Restored larger size */
-        white-space: normal; /* Allows title to wrap if very long */
+        font-size: 1.3rem;
+        text-align: center;
+        white-space: normal;
     }
 
+    /* Hide the volume slider on mobile as requested */
     .volume-container {
-        width: 100%;
-        justify-content: space-between;
+        display: none !important;
     }
 
-    #master-vol {
-        width: 120px; /* Bigger slider for easier finger control */
-        touch-action: none; /* Crucial for volume to work on mobile */
+    /* Track Card: Tighten spacing for smaller screens */
+    .track-card {
+        padding: 15px;
+        gap: 15px;
     }
 
-    /* Keep these from before to maintain the card layout */
-    .track-card { padding: 15px; gap: 15px; }
-    .card-top-row { gap: 15px; }
-    .artwork-container { width: 75px; height: 75px; }
-    .track-info { gap: 12px; }
-    .play-btn { width: 48px; height: 48px; }
-    .track-title { font-size: 1.1rem; }
+    .card-top-row {
+        gap: 15px;
+    }
 
-    /* The Waveform Fix */
-    .waveform-box { height: 40px; }
-    .time-display { font-size: 0.75rem; margin-top: 10px; } /* More space for the timer */
+    .artwork-container {
+        width: 75px;
+        height: 75px;
+    }
+
+    .track-info {
+        gap: 12px;
+    }
+
+    .play-btn {
+        width: 48px;
+        height: 48px;
+    }
+
+    .track-title {
+        font-size: 1.1rem;
+    }
+
+    /* Waveform: Maintain the 40px height you liked for mobile */
+    .waveform-box {
+        height: 40px !important;
+    }
+
+    .time-display {
+        font-size: 0.75rem;
+        margin-top: 10px;
+    }
 }
 
-/* FINAL OVERRIDE FOR ICON VISIBILITY */
+/* FINAL OVERRIDE FOR ICON VISIBILITY - Keep this at the very bottom */
 .play-btn svg {
     display: block !important;
     width: 28px !important;
     height: 28px !important;
     fill: white !important;
-    margin: auto; /* Centers it in the purple circle */
+    margin: auto;
 }
