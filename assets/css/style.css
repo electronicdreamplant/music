@@ -163,3 +163,64 @@ h1 {
     width: 100px;
     cursor: pointer;
 }
+
+/* MOBILE RESPONSIVE TWEAKS */
+@media (max-width: 600px) {
+    /* 1. Header & H1 Adjustments */
+    .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 20px;
+    }
+
+    h1 {
+        font-size: 1.4rem; /* Reduced h1 size */
+        margin: 0;
+    }
+
+    .volume-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    /* 2. Track Card Stacked Layout */
+    .track-card {
+        flex-direction: column; /* Moves wave under the info */
+        gap: 15px;
+        padding: 15px;
+    }
+
+    /* 3. Artwork & Play Row Styling */
+    .artwork-container {
+        width: 80px; /* Shrunk to match text height */
+        height: 80px;
+    }
+
+    .play-row {
+        gap: 15px;
+        margin-bottom: 0;
+    }
+
+    /* 4. Text Scaling */
+    .track-title {
+        font-size: 1.2rem;
+    }
+
+    .genre-tag {
+        font-size: 0.75rem;
+    }
+
+    /* 5. Circular Play Button (Prevent Warp) */
+    .play-btn {
+        width: 50px;
+        height: 50px;
+        flex-shrink: 0; /* Prevents squishing into an oval */
+    }
+
+    /* 6. Waveform Position */
+    .waveform-box {
+        width: 100%; /* Ensures it doesn't extend beyond screen */
+        margin-top: 5px;
+    }
+}
