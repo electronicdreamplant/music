@@ -41,6 +41,7 @@ function initWaveSurfer(btn) {
     const id = btn.id.split('-')[1];
     const currentEl = document.getElementById(`current-${id}`);
     const durationEl = document.getElementById(`duration-${id}`);
+    const currentCard = btn.closest('.track-card'); // Needed for finding the next track
 
     const ws = WaveSurfer.create({
         container: `#wave-${id}`,
@@ -55,7 +56,7 @@ function initWaveSurfer(btn) {
         height: 75,
         responsive: true,
         normalize: true,
-        volume: currentVolume, // Start every track at the master volume level
+        volume: currentVolume,
         fetchParams: { cache: 'default' }
     });
 
@@ -63,29 +64,50 @@ function initWaveSurfer(btn) {
     const pauseIcon = '<svg viewBox="0 0 24 24" width="28"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="white"/></svg>';
 
     ws.on('play', () => {
-        // KILL ALL OTHER AUDIO: Stop any track that isn't this one
         if (activeWS && activeWS !== ws) {
-            activeWS.stop(); // Snap back to start
+            activeWS.stop();
         }
 
-        // RESET ALL UI: Force every button on the page back to "Play" icon
         document.querySelectorAll('.play-btn').forEach(btnEl => {
             btnEl.innerHTML = playIcon;
         });
 
-        // RESET ALL CLOCKS: Force every timer back to 0:00 except this one
         document.querySelectorAll('.current-time').forEach(timeEl => {
             timeEl.textContent = "0:00";
         });
 
-        // SET ACTIVE: Set this track as the one and only active track
         activeWS = ws;
-        activeWS.setVolume(currentVolume); // Ensure correct volume on start
+        activeWS.setVolume(currentVolume);
         btn.innerHTML = pauseIcon;
 
-        // UPDATE GLOW:
         document.querySelectorAll('.track-card').forEach(card => card.classList.remove('is-playing'));
-        btn.closest('.track-card').classList.add('is-playing');
+        currentCard.classList.add('is-playing');
+    });
+
+    // AUTO-PLAY NEXT LOGIC
+    ws.on('finish', () => {
+        btn.innerHTML = playIcon;
+        currentCard.classList.remove('is-playing');
+
+        // Find the next track card in the HTML list
+        const nextCard = currentCard.nextElementSibling;
+
+        if (nextCard && nextCard.classList.contains('track-card')) {
+            const nextBtn = nextCard.querySelector('.play-btn');
+            if (nextBtn) {
+                // We need a tiny delay to ensure the browser is ready for the next stream
+                setTimeout(() => {
+                    nextBtn.click();
+                }, 100);
+            }
+        } else {
+            // OPTIONAL: If you want it to loop to the start, uncomment the lines below:
+            /*
+            const firstCard = document.querySelector('.track-card');
+            if (firstCard) firstCard.querySelector('.play-btn').click();
+            */
+            activeWS = null; // Everything is finished
+        }
     });
 
     ws.on('pause', () => btn.innerHTML = playIcon);
