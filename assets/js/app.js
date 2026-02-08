@@ -1,7 +1,8 @@
 import WaveSurfer from './wavesurfer.esm.js'
 
 let activeWS = null;
-let currentVolume = 0.7; // Global volume state
+let currentVolume = 0.5; // Set a default starting volume
+const allWaveSurfers = []; // Array to track all instances for volume control
 
 const formatTime = (seconds) => {
     if (isNaN(seconds)) return "0:00";
@@ -15,19 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const masterVol = document.getElementById('master-vol');
     if (masterVol) {
         masterVol.addEventListener('input', (e) => {
-            currentVolume = e.target.value;
-            if (activeWS) {
-                activeWS.setVolume(currentVolume);
-            }
+            currentVolume = e.target.value / 100; // Convert 0-100 slider to 0-1
+
+            // Update every track that has been initialized so far
+            allWaveSurfers.forEach(ws => {
+                if (ws) ws.setVolume(currentVolume);
+            });
         });
     }
 
-    // Setting up the observer for Lazy Loading
+    // 2. LAZY LOADING OBSERVER
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const btn = entry.target.querySelector('.play-btn');
-                initWaveSurfer(btn);
+                if (btn) {
+                    initWaveSurfer(btn);
+                }
                 observer.unobserve(entry.target);
             }
         });
@@ -41,7 +46,7 @@ function initWaveSurfer(btn) {
     const id = btn.id.split('-')[1];
     const currentEl = document.getElementById(`current-${id}`);
     const durationEl = document.getElementById(`duration-${id}`);
-    const currentCard = btn.closest('.track-card'); // Needed for finding the next track
+    const currentCard = btn.closest('.track-card');
 
     const ws = WaveSurfer.create({
         container: `#wave-${id}`,
@@ -53,33 +58,34 @@ function initWaveSurfer(btn) {
         barWidth: 2,
         barGap: 2,
         barRadius: 4,
-        height: 75,
+        height: 60, // Matches your updated CSS height
         responsive: true,
         normalize: true,
-        volume: currentVolume,
+        volume: currentVolume, // Uses the current slider position
         fetchParams: { cache: 'default' }
     });
+
+    // Add this instance to our global list
+    allWaveSurfers.push(ws);
 
     const playIcon = '<svg viewBox="0 0 24 24" width="28"><path d="M8 5v14l11-7z" fill="white"/></svg>';
     const pauseIcon = '<svg viewBox="0 0 24 24" width="28"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="white"/></svg>';
 
     ws.on('play', () => {
+        // Stop any other track currently playing
         if (activeWS && activeWS !== ws) {
             activeWS.stop();
         }
 
+        // Reset all buttons to Play
         document.querySelectorAll('.play-btn').forEach(btnEl => {
             btnEl.innerHTML = playIcon;
         });
 
-        document.querySelectorAll('.current-time').forEach(timeEl => {
-            timeEl.textContent = "0:00";
-        });
-
         activeWS = ws;
-        activeWS.setVolume(currentVolume);
         btn.innerHTML = pauseIcon;
 
+        // Highlight the current card
         document.querySelectorAll('.track-card').forEach(card => card.classList.remove('is-playing'));
         currentCard.classList.add('is-playing');
     });
@@ -89,31 +95,32 @@ function initWaveSurfer(btn) {
         btn.innerHTML = playIcon;
         currentCard.classList.remove('is-playing');
 
-        // Find the next track card in the HTML list
         const nextCard = currentCard.nextElementSibling;
-
         if (nextCard && nextCard.classList.contains('track-card')) {
             const nextBtn = nextCard.querySelector('.play-btn');
             if (nextBtn) {
-                // We need a tiny delay to ensure the browser is ready for the next stream
                 setTimeout(() => {
                     nextBtn.click();
                 }, 100);
             }
         } else {
-            // OPTIONAL: If you want it to loop to the start, uncomment the lines below:
-            /*
-            const firstCard = document.querySelector('.track-card');
-            if (firstCard) firstCard.querySelector('.play-btn').click();
-            */
-            activeWS = null; // Everything is finished
+            activeWS = null;
         }
     });
 
     ws.on('pause', () => btn.innerHTML = playIcon);
-    ws.on('ready', () => { if (durationEl) durationEl.textContent = formatTime(ws.getDuration()); });
-    ws.on('timeupdate', (time) => { if (currentEl) currentEl.textContent = formatTime(time); });
-    ws.on('interaction', () => { if (currentEl) currentEl.textContent = formatTime(ws.getCurrentTime()); });
+
+    ws.on('ready', () => {
+        if (durationEl) durationEl.textContent = formatTime(ws.getDuration());
+    });
+
+    ws.on('timeupdate', (time) => {
+        if (currentEl) currentEl.textContent = formatTime(time);
+    });
+
+    ws.on('interaction', () => {
+        if (currentEl) currentEl.textContent = formatTime(ws.getCurrentTime());
+    });
 
     btn.onclick = () => ws.playPause();
 }
