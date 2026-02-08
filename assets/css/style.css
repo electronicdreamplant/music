@@ -132,13 +132,16 @@ h1 {
     position: relative;
     width: 100%;
     height: 75px;
-    background: #222; /* The gray 'box' visible on load */
+    /* The Shimmer is now part of the background so the canvas can cover it */
+    background: #222 linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
     border-radius: 4px;
     margin: 10px 0;
     overflow: hidden;
 }
 
-/* The 'Dummy' Flat Line */
+/* The 'Dummy' Flat Line - Muted Purple */
 .waveform-box::before {
     content: "";
     position: absolute;
@@ -146,33 +149,21 @@ h1 {
     left: 0;
     width: 100%;
     height: 2px;
-    background: #444;
-    z-index: 1; /* Sits behind the real wave */
-}
-
-/* The Shimmer Animation */
-.waveform-box::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-    transform: translateX(-100%);
-    animation: shimmer 2s infinite;
-    z-index: 2;
+    background: rgba(179, 102, 255, 0.3); /* Muted purple line */
+    z-index: 1;
 }
 
 @keyframes shimmer {
-    100% { transform: translateX(100%); }
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
-/* IMPORTANT: This ensures the real wave only shows up when it's ready */
+/* The Real Wave (Canvas) */
 .waveform-box canvas {
     position: relative;
     z-index: 3;
-    /* Removed the solid background color so it doesn't block the skeleton early */
+    /* This solid background hides the shimmer and dummy line once loaded */
+    background: #181818;
 }
 
 .time-display {
