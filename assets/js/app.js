@@ -58,7 +58,8 @@ function initWaveSurfer(btn) {
         barWidth: 2,
         barGap: 2,
         barRadius: 4,
-        height: 60, // Matches your updated CSS height
+        height: 40, // Matches your updated CSS height
+        barHeight: 0.8, // This ensures the bars fit within the 40px //
         responsive: true,
         normalize: true,
         volume: currentVolume, // Uses the current slider position
