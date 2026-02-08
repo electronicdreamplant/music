@@ -166,7 +166,6 @@ h1 {
 
 /* MOBILE RESPONSIVE TWEAKS */
 @media (max-width: 600px) {
-    /* 1. Header Cleanup */
     .site-header {
         flex-direction: column;
         align-items: flex-start;
@@ -176,7 +175,6 @@ h1 {
 
     h1 {
         font-size: 1.3rem;
-        margin: 0;
     }
 
     .volume-container {
@@ -184,37 +182,38 @@ h1 {
         max-width: 220px;
     }
 
-    /* 2. Track Card: The 'Wrap' Logic */
+    /* 1. FORCE THE CARD TO WRAP */
     .track-card {
-        flex-wrap: wrap; /* Allows children to drop to new lines */
-        padding: 15px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 12px;
         gap: 10px;
+        align-items: flex-start;
     }
 
-    /* 3. Top Row (Art + Text + Button) */
+    /* 2. SHRINK ARTWORK */
     .artwork-container {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         flex-shrink: 0;
     }
 
+    /* 3. INFO SECTION: Stays next to artwork */
     .track-content {
-        flex: 1; /* Takes up remaining top-row space */
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-        min-width: 200px; /* Prevents text from squishing too much */
+        flex: 1;
+        min-width: 150px;
     }
 
     .play-row {
         margin-bottom: 0;
-        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
-    /* 4. Scaled Text & Circular Button */
     .track-title {
         font-size: 1.1rem;
+        margin: 0;
     }
 
     .genre-tag {
@@ -222,25 +221,23 @@ h1 {
     }
 
     .play-btn {
-        width: 48px;
-        height: 48px;
+        width: 44px;
+        height: 44px;
         flex-shrink: 0;
     }
 
-    /* 5. FULL WIDTH WAVEFORM - The Breakout */
+    /* 4. FULL WIDTH WAVEFORM: Forced to break out */
     .waveform-box {
-        width: 100% !important; /* Force it to break to its own line */
-        height: 60px !important; /* Shrunk height as requested */
-        margin-top: 10px;
-        order: 3; /* Ensures it sits below art and text */
+        width: 100% !important;
+        height: 50px !important; /* Shrunk height further */
+        margin-top: 15px;
+        flex-basis: 100%; /* Force it to take its own row */
     }
 
-    /* 6. Time Display */
     .time-display {
         width: 100%;
         text-align: right;
         font-size: 0.75rem;
         margin-top: 5px;
-        order: 4;
     }
 }
