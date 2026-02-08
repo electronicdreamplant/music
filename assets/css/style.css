@@ -31,7 +31,6 @@ h1 {
     padding: 20px;
     gap: 25px;
     border: 1px solid #222;
-    border-radius: 10px;
     transition: border-color 0.3s;
 }
 
