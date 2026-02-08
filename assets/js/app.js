@@ -51,9 +51,24 @@ function initWaveSurfer(btn) {
     const pauseIcon = '<svg viewBox="0 0 24 24" width="28"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="white"/></svg>';
 
     ws.on('play', () => {
-        if (activeWS && activeWS !== ws) activeWS.pause();
+        // 1. STOP & RESET: If another track is playing, stop it and snap back to 0:00
+        if (activeWS && activeWS !== ws) {
+            activeWS.stop(); // This resets the playhead
+
+            // Optional: Manually reset the text for the old track's clock
+            const oldId = activeWS.container.id.split('-')[1];
+            const oldCurrentEl = document.getElementById(`current-${oldId}`);
+            if (oldCurrentEl) oldCurrentEl.textContent = "0:00";
+        }
+
         activeWS = ws;
         btn.innerHTML = pauseIcon;
+
+        // 2. GLOW LOGIC: Remove 'is-playing' from all cards, then add to this one
+        document.querySelectorAll('.track-card').forEach(card => {
+            card.classList.remove('is-playing');
+        });
+        btn.closest('.track-card').classList.add('is-playing');
     });
 
     ws.on('pause', () => btn.innerHTML = playIcon);

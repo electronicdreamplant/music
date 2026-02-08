@@ -41,8 +41,21 @@ h1 {
     background: #1f1f1f;
 }
 
+/* The 'Glow' effect for the active track */
+.track-card.is-playing {
+    border-color: #b366ff;
+    background: #1f1f1f;
+    box-shadow: 0 0 20px rgba(179, 102, 255, 0.15); /* Subtle purple glow */
+    transition: all 0.4s ease;
+}
+
+/* Ensure the glow disappears when the track is stopped */
+.track-card {
+    transition: all 0.4s ease;
+}
+
 .track-card:hover {
-    border-color: #444;
+    border-color: #b366ff;
 }
 
 .artwork-container {
@@ -75,7 +88,7 @@ h1 {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: #b366ff; 
+    background: #b366ff;
     border: none;
     cursor: pointer;
     display: flex;
