@@ -127,46 +127,17 @@ h1 {
     letter-spacing: 1px;
 }
 
-/* CONSOLIDATED WAVEFORM SKELETON */
 .waveform-box {
     position: relative;
     width: 100%;
     height: 75px;
-    /* Shimmering background for the loading state */
-    background: #222 linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite linear;
+    background: #222; /* Just a solid, stable placeholder */
     border-radius: 4px;
     margin: 10px 0;
-    overflow: hidden;
 }
 
-/* The 'Dummy' Flat Line - Muted Purple */
-.waveform-box::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: rgba(179, 102, 255, 0.3);
-    z-index: 1;
-}
-
-@keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-
-/* THE FIX: The Real Wave (Canvas) */
-/* We target the specific container WaveSurfer creates to hide the shimmer */
-.waveform-box shadow-root,
-.waveform-box canvas,
-.waveform-box div {
-    position: relative;
-    z-index: 5;
-    /* This solid color acts as the 'curtain' to hide the shimmer once loaded */
-    background: #181818 !important;
+.waveform-box canvas {
+    background: #181818;
 }
 
 .time-display {
