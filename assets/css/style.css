@@ -162,3 +162,12 @@ body {
     .waveform-box { height: 40px; } /* Shrunk for mobile visual representation */
     .time-display { font-size: 0.75rem; margin-top: 8px; }
 }
+
+/* FINAL OVERRIDE FOR ICON VISIBILITY */
+.play-btn svg {
+    display: block !important;
+    width: 28px !important;
+    height: 28px !important;
+    fill: white !important;
+    margin: auto; /* Centers it in the purple circle */
+}
