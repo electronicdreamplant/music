@@ -128,8 +128,33 @@ h1 {
 }
 
 .waveform-box {
+    position: relative;
     width: 100%;
-    height: 80px;
+    height: 75px; /* Matches your WaveSurfer height */
+    background: #222; /* The 'dummy' background color */
+    border-radius: 4px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+/* This creates the 'Flat Line' dummy wave */
+.waveform-box::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #444;
+    z-index: 1;
+}
+
+/* This ensures the REAL wave sits on top of the dummy line */
+.waveform-box shadow-root,
+.waveform-box canvas {
+    position: relative;
+    z-index: 5;
+    background: #181818; /* Matches your track card background */
 }
 
 .wave-container {
