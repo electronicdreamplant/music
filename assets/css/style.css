@@ -35,6 +35,12 @@ h1 {
     transition: border-color 0.3s;
 }
 
+/* This makes the card "glow" slightly when it's the active one */
+.track-card:focus-within {
+    border-color: #b366ff;
+    background: #1f1f1f;
+}
+
 .track-card:hover {
     border-color: #444;
 }
