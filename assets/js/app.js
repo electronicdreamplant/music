@@ -30,7 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
             barRadius: 4,
             height: 75,              // Your updated height
             responsive: true,
-            normalize: true
+            normalize: true,
+            backend: 'WebAudio', 
+            autoCenter: false,
+            hideScrollbar: true,
         });
 
         const playIcon = '<svg viewBox="0 0 24 24" width="28"><path d="M8 5v14l11-7z" fill="white"/></svg>';
