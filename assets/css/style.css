@@ -127,17 +127,18 @@ h1 {
     letter-spacing: 1px;
 }
 
+/* CONSOLIDATED WAVEFORM SKELETON */
 .waveform-box {
     position: relative;
     width: 100%;
-    height: 75px; /* Matches your WaveSurfer height */
-    background: #222; /* The 'dummy' background color */
+    height: 75px;
+    background: #222; /* The gray 'box' visible on load */
     border-radius: 4px;
     margin: 10px 0;
     overflow: hidden;
 }
 
-/* This creates the 'Flat Line' dummy wave */
+/* The 'Dummy' Flat Line */
 .waveform-box::before {
     content: "";
     position: absolute;
@@ -146,37 +147,32 @@ h1 {
     width: 100%;
     height: 2px;
     background: #444;
-    z-index: 1;
+    z-index: 1; /* Sits behind the real wave */
 }
 
-/* This ensures the REAL wave sits on top of the dummy line */
-.waveform-box shadow-root,
+/* The Shimmer Animation */
+.waveform-box::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+    z-index: 2;
+}
+
+@keyframes shimmer {
+    100% { transform: translateX(100%); }
+}
+
+/* IMPORTANT: This ensures the real wave only shows up when it's ready */
 .waveform-box canvas {
     position: relative;
-    z-index: 5;
-    background: #181818; /* Matches your track card background */
-}
-
-.wave-container {
-    position: relative;
-    min-height: 75px;
-    background: linear-gradient(90deg, #222 25%, #333 50%, #222 75%);
-    background-size: 200% 100%;
-    animation: wave-loading 1.5s infinite;
-    border-radius: 4px;
-}
-
-/* Optional: Subtle animation to show it's "thinking" */
-@keyframes wave-loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-
-/* Hide the skeleton background once WaveSurfer draws the canvas */
-.wave-container canvas {
-    position: relative;
-    z-index: 2;
-    background: #181818; /* Match your card background */
+    z-index: 3;
+    /* Removed the solid background color so it doesn't block the skeleton early */
 }
 
 .time-display {
