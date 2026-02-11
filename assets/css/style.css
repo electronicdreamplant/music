@@ -179,8 +179,8 @@ body {
     }
 
     .site-header h1 {
-        font-size: 1rem; /* Slightly smaller to ensure fit */
-        font-weight: 200;
+        font-size: 1.5rem; /* Slightly smaller to ensure fit */
+        font-weight: 400;
         white-space: normal; /* Allows wrapping if screen is very narrow */
         line-height: 1.2;
     }
@@ -196,6 +196,7 @@ body {
     .artwork-container { width: 75px; height: 75px; }
     .play-btn { width: 48px; height: 48px; }
     .waveform-box { height: 40px !important; }
+    .track-title  {font-size: 1.2rem}
 }
 
 /* 8. FINAL OVERRIDE FOR ICON VISIBILITY */
