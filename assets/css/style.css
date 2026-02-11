@@ -4,6 +4,7 @@ body {
     color: #fff;
     margin: 0;
     font-family: Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 .container {
@@ -12,7 +13,7 @@ body {
     padding: 20px;
 }
 
-/* HEADER - Restoring height and spacing */
+/* 2. HEADER - Desktop */
 .site-header {
     position: sticky;
     top: 0;
@@ -22,7 +23,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    min-height: 120px; /* Increased to accommodate the 100px logo comfortably */
+    min-height: 120px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
 .header-left {
@@ -34,15 +36,15 @@ body {
 .site-logo {
     width: 100px;
     height: 100px;
-    object-fit: cover; /* Ensures square crop if the original isn't perfectly 1:1 */
-    border-radius: 5px; /* Softens the corners to match your UI */
-    border: 1px solid #ffffff; /* Subtle frame */
+    object-fit: cover;
+    border: 0.5px solid #fff;
+    border-radius: 5px;
     flex-shrink: 0;
 }
 
 .site-header h1 {
-    font-size: 2.7rem;
-    font-weight: 200; /* Your requested skinny weight */
+    font-size: 2.2rem;
+    font-weight: 200;
     margin: 0;
     color: #fff;
     letter-spacing: 1px;
@@ -64,16 +66,15 @@ body {
     cursor: pointer;
 }
 
-/* 4. TRACK CARD - The Grid Fix */
+/* 4. TRACK CARD */
 .track-card {
     background: #181818;
     margin-bottom: 30px;
     padding: 20px;
     border-radius: 10px;
-    /* Thin purple border as requested */
     border: 1px solid rgba(179, 102, 255, 0.3);
     display: flex;
-    flex-direction: column; /* Stacks info row on top of waveform */
+    flex-direction: column;
     gap: 20px;
     transition: all 0.4s ease;
 }
@@ -84,7 +85,7 @@ body {
     box-shadow: 0 0 20px rgba(179, 102, 255, 0.3);
 }
 
-/* 5. CARD TOP ROW (Art, Btn, Title) */
+/* 5. CARD TOP ROW */
 .card-top-row {
     display: flex;
     align-items: center;
@@ -102,7 +103,7 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
-    border: 1px solid #fff;
+    border: 0.5px solid #fff;
 }
 
 .track-info {
@@ -125,12 +126,6 @@ body {
     justify-content: center;
 }
 
-.play-btn svg {
-    fill: white;
-    width: 30px;
-    height: 30px;
-}
-
 .track-title {
     margin: 0;
     font-weight: 300;
@@ -143,16 +138,12 @@ body {
     text-transform: uppercase;
 }
 
-/* 6. DESKTOP WAVEFORM HEIGHT (Default) */
+/* 6. WAVEFORM SECTION */
 .waveform-box {
     width: 100%;
-    height: 75px; /* Restored for desktop */
+    height: 75px;
     background: #222;
     border-radius: 4px;
-}
-
-.waveform-box canvas {
-    background: #181818;
 }
 
 .time-display {
@@ -165,98 +156,38 @@ body {
 
 /* 7. MOBILE RESPONSIVE TWEAKS */
 @media (max-width: 600px) {
-    /* Header: Remove volume overlap by hiding volume and centering title */
     .site-header {
-            flex-direction: row; /* Mimics desktop horizontal flow */
-            justify-content: flex-start;
-            padding: 10px 15px;
-            gap: 12px;
-            min-height: 70px;
-        }
-
-        Gemini said
-    That is a much cleaner way to do it. Here are the specific blocks that have changed to accommodate the 200 weight title, the 100px logo, and the horizontal mobile layout.
-
-    1. Updated Header & Logo (Desktop)
-
-    Replace your existing .site-header, .header-left, and .site-logo sections with this:
-
-    CSS
-    .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        background: #800080;
-        padding: 15px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        min-height: 120px; /* Increased for the 100px logo */
-        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 10px 15px;
+        gap: 12px;
+        min-height: 70px;
     }
 
     .header-left {
-        display: flex;
+        flex-direction: row;
         align-items: center;
-        gap: 20px;
+        gap: 12px;
     }
 
     .site-logo {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        border: 0.5px solid #fff; /* Matches track artwork */
+        width: 50px;
+        height: 50px;
+        border: 0.5px solid #fff;
         border-radius: 5px;
-        flex-shrink: 0;
     }
 
     .site-header h1 {
-        font-size: 2.2rem;
-        font-weight: 200; /* Your requested skinny weight */
-        margin: 0;
-        color: #fff;
-        letter-spacing: 1px;
+        font-size: 1.2rem;
+        font-weight: 200;
+        text-align: left;
+        white-space: nowrap;
     }
-    2. Updated Mobile Responsive Section
 
-    Replace your entire @media (max-width: 600px) block with this one to force the horizontal "Desktop-style" layout:
-
-    CSS
-    @media (max-width: 600px) {
-      .site-header {
-            flex-direction: row; /* Mimics desktop horizontal flow */
-            justify-content: flex-start;
-            padding: 10px 15px;
-            gap: 12px;
-            min-height: 70px;
-      }
-
-      .header-left {
-            flex-direction: row;
-            align-items: center;
-            gap: 12px;
-      }
-
-      .site-logo {
-              width: 50px; /* Scaled down to fit title side-by-side */
-              height: 50px;
-              border: 0.5px solid #fff;
-              border-radius: 5px;
-          }
-
-      .site-header h1 {
-              font-size: 1.2rem;
-              font-weight: 200; /* Consistent skinny weight */
-              text-align: left;
-              white-space: nowrap; /* Prevents title from dropping below logo */
-          }
-
-    /* Hide the volume slider on mobile as requested */
     .volume-container {
         display: none !important;
     }
 
-    /* Track Card: Tighten spacing for smaller screens */
     .track-card {
         padding: 15px;
         gap: 15px;
@@ -284,7 +215,6 @@ body {
         font-size: 1.1rem;
     }
 
-    /* Waveform: Maintain the 40px height you liked for mobile */
     .waveform-box {
         height: 40px !important;
     }
@@ -295,7 +225,7 @@ body {
     }
 }
 
-/* FINAL OVERRIDE FOR ICON VISIBILITY - Keep this at the very bottom */
+/* 8. FINAL OVERRIDE FOR ICON VISIBILITY */
 .play-btn svg {
     display: block !important;
     width: 28px !important;
