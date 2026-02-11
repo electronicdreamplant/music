@@ -41,9 +41,11 @@ body {
 }
 
 .site-header h1 {
-    font-size: 1.8rem; /* Larger title */
-    font-weight: 100;
+    font-size: 2.7rem;
+    font-weight: 200; /* Your requested skinny weight */
     margin: 0;
+    color: #fff;
+    letter-spacing: 1px;
 }
 
 /* 3. MASTER VOLUME */
@@ -165,27 +167,89 @@ body {
 @media (max-width: 600px) {
     /* Header: Remove volume overlap by hiding volume and centering title */
     .site-header {
-        justify-content: left;
-        padding: 15px 20px;
-        min-height: 60px;
+            flex-direction: row; /* Mimics desktop horizontal flow */
+            justify-content: flex-start;
+            padding: 10px 15px;
+            gap: 12px;
+            min-height: 70px;
+        }
+
+        Gemini said
+    That is a much cleaner way to do it. Here are the specific blocks that have changed to accommodate the 200 weight title, the 100px logo, and the horizontal mobile layout.
+
+    1. Updated Header & Logo (Desktop)
+
+    Replace your existing .site-header, .header-left, and .site-logo sections with this:
+
+    CSS
+    .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #800080;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 120px; /* Increased for the 100px logo */
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
     .header-left {
-        flex-direction: column;
-        gap: 10px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
     }
 
     .site-logo {
-        width: 80px; /* Slightly larger on mobile than previously planned */
-        height: 80px;
-        margin-bottom: 5px;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border: 0.5px solid #fff; /* Matches track artwork */
+        border-radius: 5px;
+        flex-shrink: 0;
     }
 
     .site-header h1 {
-        font-size: 1.3rem;
-        text-align: left;
-        white-space: normal;
+        font-size: 2.2rem;
+        font-weight: 200; /* Your requested skinny weight */
+        margin: 0;
+        color: #fff;
+        letter-spacing: 1px;
     }
+    2. Updated Mobile Responsive Section
+
+    Replace your entire @media (max-width: 600px) block with this one to force the horizontal "Desktop-style" layout:
+
+    CSS
+    @media (max-width: 600px) {
+      .site-header {
+            flex-direction: row; /* Mimics desktop horizontal flow */
+            justify-content: flex-start;
+            padding: 10px 15px;
+            gap: 12px;
+            min-height: 70px;
+      }
+
+      .header-left {
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+      }
+
+      .site-logo {
+              width: 50px; /* Scaled down to fit title side-by-side */
+              height: 50px;
+              border: 0.5px solid #fff;
+              border-radius: 5px;
+          }
+
+      .site-header h1 {
+              font-size: 1.2rem;
+              font-weight: 200; /* Consistent skinny weight */
+              text-align: left;
+              white-space: nowrap; /* Prevents title from dropping below logo */
+          }
 
     /* Hide the volume slider on mobile as requested */
     .volume-container {
