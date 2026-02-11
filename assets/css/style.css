@@ -35,8 +35,8 @@ body {
     width: 100px;
     height: 100px;
     object-fit: cover; /* Ensures square crop if the original isn't perfectly 1:1 */
-    border-radius: 8px; /* Softens the corners to match your UI */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle frame */
+    border-radius: 5px; /* Softens the corners to match your UI */
+    border: 1px solid #ffffff; /* Subtle frame */
     flex-shrink: 0;
 }
 
@@ -100,7 +100,7 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
-    border: 0.5px solid #fff;
+    border: 1px solid #fff;
 }
 
 .track-info {
