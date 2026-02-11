@@ -13,7 +13,7 @@ body {
     padding: 20px;
 }
 
-/* 2. HEADER - Desktop */
+/* 2. HEADER - Fixed for Full Width */
 .site-header {
     position: sticky;
     top: 0;
@@ -24,6 +24,8 @@ body {
     align-items: center;
     padding: 15px 30px;
     min-height: 120px;
+    width: 100%; /* Ensures purple spans the whole screen */
+    box-sizing: border-box; /* Prevents padding from pushing header off-screen */
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
@@ -158,71 +160,47 @@ body {
 @media (max-width: 600px) {
     .site-header {
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-between; /* Keeps logo/title left and Vol right */
         padding: 10px 15px;
-        gap: 12px;
-        min-height: 70px;
+        min-height: 80px;
+        width: 100%;
     }
 
     .header-left {
         flex-direction: row;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
+        width: auto; /* Allows it to take only needed space */
     }
 
     .site-logo {
-        width: 50px;
-        height: 50px;
-        border: 0.5px solid #fff;
-        border-radius: 5px;
+        width: 45px;
+        height: 45px;
     }
 
     .site-header h1 {
-        font-size: 1.2rem;
+        font-size: 1rem; /* Slightly smaller to ensure fit */
         font-weight: 200;
-        text-align: left;
-        white-space: nowrap;
+        white-space: normal; /* Allows wrapping if screen is very narrow */
+        line-height: 1.2;
     }
 
+    /* Restoring Volume visibility on mobile but making it smaller */
     .volume-container {
-        display: none !important;
+        display: flex !important;
+        padding: 5px 10px;
+        gap: 8px;
     }
 
-    .track-card {
-        padding: 15px;
-        gap: 15px;
+    #master-vol {
+        width: 60px; /* Small slider for mobile header */
     }
 
-    .card-top-row {
-        gap: 15px;
-    }
-
-    .artwork-container {
-        width: 75px;
-        height: 75px;
-    }
-
-    .track-info {
-        gap: 12px;
-    }
-
-    .play-btn {
-        width: 48px;
-        height: 48px;
-    }
-
-    .track-title {
-        font-size: 1.1rem;
-    }
-
-    .waveform-box {
-        height: 40px !important;
-    }
-
-    .time-display {
-        font-size: 0.75rem;
-        margin-top: 10px;
-    }
+    /* Track Card Mobile Adjustments */
+    .track-card { padding: 15px; }
+    .artwork-container { width: 75px; height: 75px; }
+    .play-btn { width: 48px; height: 48px; }
+    .waveform-box { height: 40px !important; }
 }
 
 /* 8. FINAL OVERRIDE FOR ICON VISIBILITY */
