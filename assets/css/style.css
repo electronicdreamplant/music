@@ -18,11 +18,26 @@ body {
     top: 0;
     z-index: 1000;
     background: #800080;
-    padding: 20px 30px; /* Increased padding */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 80px; /* Ensures it doesn't feel cramped */
+    padding: 15px 30px;
+    min-height: 120px; /* Increased to accommodate the 100px logo comfortably */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.site-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover; /* Ensures square crop if the original isn't perfectly 1:1 */
+    border-radius: 8px; /* Softens the corners to match your UI */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle frame */
+    flex-shrink: 0;
 }
 
 .site-header h1 {
@@ -153,6 +168,17 @@ body {
         justify-content: left;
         padding: 15px 20px;
         min-height: 60px;
+    }
+
+    .header-left {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .site-logo {
+        width: 80px; /* Slightly larger on mobile than previously planned */
+        height: 80px;
+        margin-bottom: 5px;
     }
 
     .site-header h1 {
