@@ -185,16 +185,11 @@ body {
         line-height: 1.2;
     }
 
-    /* Restoring Volume visibility on mobile but making it smaller */
-    .volume-container {
-        display: flex !important;
-        padding: 5px 10px;
-        gap: 8px;
-    }
+    /* HIDING VOLUME ON MOBILE  */
+        .volume-container {
+            display: none !important;
+        }
 
-    #master-vol {
-        width: 60px; /* Small slider for mobile header */
-    }
 
     /* Track Card Mobile Adjustments */
     .track-card { padding: 15px; }
