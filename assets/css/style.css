@@ -115,6 +115,15 @@ body {
     flex-grow: 1;
 }
 
+/* --- TRACK INFO BASELINE --- */
+.track-title {
+    margin: 0;
+    font-weight: 300;
+    font-size: 1.6rem; /* This is your new desktop size */
+    color: #fff;
+    line-height: 1.2;
+}
+
 .play-btn {
     width: 60px;
     height: 60px;
@@ -186,17 +195,49 @@ body {
     }
 
     /* HIDING VOLUME ON MOBILE  */
-        .volume-container {
-            display: none !important;
+    .volume-container {
+        display: none !important;
         }
 
 
     /* Track Card Mobile Adjustments */
-    .track-card { padding: 15px; }
-    .artwork-container { width: 75px; height: 75px; }
-    .play-btn { width: 48px; height: 48px; }
-    .waveform-box { height: 40px !important; }
-    .track-title  {font-size: 1.2rem}
+    .track-card {
+        padding: 12px;
+        gap: 12px; /* Tightens space between top info and waveform */
+        }
+
+    .card-top-row {
+        gap: 12px;
+        }
+
+    .artwork-container {
+        width: 60px;
+        height: 60px;
+        }
+
+    .track-info {
+        gap: 10px;
+        }
+
+    .play-btn svg {
+        width: 20px;
+        height: 20px;
+        }
+
+    .waveform-box {
+        height: 35px !important;
+        }
+
+    .track-title {
+        font-size: 1.1rem; /* Slightly smaller to prevent wrapping */
+        line-height: 1.1;
+        }
+
+    .time-display {
+        font-size: 0.7rem;
+        margin-top: 5px;
+        }
+
 }
 
 /* 8. FINAL OVERRIDE FOR ICON VISIBILITY */
