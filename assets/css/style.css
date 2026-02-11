@@ -229,13 +229,25 @@ body {
         }
 
     .track-title {
-        font-size: 1.1rem; /* Slightly smaller to prevent wrapping */
-        line-height: 1.1;
+        font-size: 1.1rem;
+        margin-left: 2px; /* Tiny bit of breathing room */
         }
 
     .time-display {
         font-size: 0.7rem;
         margin-top: 5px;
+        }
+
+    /* Shrinking the play button for better proportion */
+    .play-btn {
+        width: 40px;  /* Dropped from 60px */
+        height: 40px;
+        }
+
+    /* Scaling the white triangle icon to fit the new circle */
+    .play-btn svg {
+        width: 18px !important; /* Scaled down from 28px */
+        height: 18px !important;
         }
 
 }
